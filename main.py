@@ -80,27 +80,28 @@ def kartenZiehen(arr):
     random.shuffle(arr)
     return arr[-5:]
 
-
 def kartenZiehenSelberMachen(arr):
     for i in range(5):
         rand = random.randint(0, 51 - i)
         arr[rand], arr[51 - i] = arr[51 - i], arr[rand]
     return arr[-5:]
 
-
-if __name__ == '__main__':
-    durchleufe = 20000000
+def main():
+    durchleufe = 10000000
     pokerDeck = pokerDeckErstellen()
     for i in range(durchleufe):
         kartenAnalysieren(kartenZiehenSelberMachen(pokerDeck))
-    print(vars(kombinationen))
     zaehler = 0
     for key in sorted(vars(kombinationen), key=vars(kombinationen).get, reverse=True):
         print("{0}: {1} -> {2}% -> {3}% (calculated) ".format(key, vars(kombinationen)[key],
                                                               round(vars(kombinationen)[key] / durchleufe * 100, 5),
                                                               calculated_percentage[zaehler]))
         zaehler += 1
-    """
+
+if __name__ == '__main__':
+   main()
+
+"""
     startTime = time.time_ns()
     for i in range(100000):
         kartenZiehen(pokerDeck)
@@ -118,3 +119,5 @@ if __name__ == '__main__':
     print((firstTime - startTime)/(secoundTime-firstTime))
 """
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
+#abfragen in einzelne methoden
+#main in methode geben
